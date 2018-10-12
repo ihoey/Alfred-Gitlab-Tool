@@ -27,7 +27,7 @@ def get_gitlab_repos(url, token, page, result):
 
 def get_gitlab_issue(url, token, query, page, result):
     if page == 1:
-        url = url.encode('utf-8') + '/search?scope=issues&search='+query
+        url = url.encode('utf-8') + '/issues?search='+query
     params = dict(private_token=token, per_page=100, page=page)
     r = web.get(url, params)
     r.raise_for_status()
@@ -44,7 +44,7 @@ def get_gitlab_merge_requests(url, token, page, result):
     params = dict(private_token=token,
                   per_page=100,
                   page=page,
-                  scope='assigned_to_me',
+                  scope='assigned-to-me',
                   state='opened')
     r = web.get(url, params)
     r.raise_for_status()
